@@ -1,20 +1,39 @@
-const ESCAPED_DASH_PLACEHOLDER = "\u0000";
-
 function parseFilename(filename) {
   const base = filename.replace(/\.png$/i, "");
-  // Protect escaped dashes ("\-") from being used as the cost separator.
-  const protectedBase = base.split("\\-").join(ESCAPED_DASH_PLACEHOLDER);
 
-  const idx = protectedBase.lastIndexOf("-");
-  const unescape = (s) => s.split(ESCAPED_DASH_PLACEHOLDER).join("-").replace(/_/g, " ");
-
-  if (idx === -1) {
-    return { name: unescape(protectedBase), cost: null };
+  // Walk the string once. "\-" and "--" both count as an escaped, literal
+  // dash (collapsed to a single "-" in the output). Only a lone "-" that
+  // isn't part of either pattern is a separator candidate; the LAST such
+  // candidate is used as the name/cost split point.
+  const chars = [];
+  let lastSepIdx = -1;
+  let i = 0;
+  while (i < base.length) {
+    if (base[i] === "\\" && base[i + 1] === "-") {
+      chars.push("-");
+      i += 2;
+    } else if (base[i] === "-" && base[i + 1] === "-") {
+      chars.push("-");
+      i += 2;
+    } else if (base[i] === "-") {
+      chars.push("-");
+      lastSepIdx = chars.length - 1;
+      i += 1;
+    } else {
+      chars.push(base[i]);
+      i += 1;
+    }
   }
-  const namePart = protectedBase.slice(0, idx);
-  const costPart = protectedBase.slice(idx + 1);
+
+  const clean = (s) => s.replace(/_/g, " ");
+
+  if (lastSepIdx === -1) {
+    return { name: clean(chars.join("")), cost: null };
+  }
+  const namePart = chars.slice(0, lastSepIdx).join("");
+  const costPart = chars.slice(lastSepIdx + 1).join("");
   const costNum = parseFloat(costPart.replace(/[^0-9.]/g, ""));
-  return { name: unescape(namePart), cost: isNaN(costNum) ? null : costNum };
+  return { name: clean(namePart), cost: isNaN(costNum) ? null : costNum };
 }
 
 function capitalize(s) {
