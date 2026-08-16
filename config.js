@@ -47,7 +47,7 @@ const CATEGORIES = {
     path: "items",
     soundsPath: "sounds/items",
     metaPath: "items/meta.json",
-    currencies: ["buttcoins"],
+    currencies: ["buttcoins", "stuffing"],
   },
   entities: {
     title: "Entity Gallery",
@@ -65,7 +65,7 @@ const CATEGORIES = {
     path: "potions",
     soundsPath: "sounds/potions",
     metaPath: "potions/meta.json",
-    currencies: ["buttcoins"],
+    currencies: ["buttcoins", "stuffing"],
   },
   discs: {
     title: "Discs",
@@ -74,7 +74,7 @@ const CATEGORIES = {
     path: "discs",
     soundsPath: "sounds/discs",
     metaPath: "discs/meta.json",
-    currencies: ["buttcoins"],
+    currencies: ["buttcoins", "stuffing"],
   },
   food: {
     title: "Food",
@@ -92,7 +92,7 @@ const CATEGORIES = {
     path: "paints",
     soundsPath: "sounds/paints",
     metaPath: "paints/meta.json",
-    currencies: ["buttcoins"],
+    currencies: ["buttcoins", "stuffing"],
   },
   pets: {
     title: "Pets",
@@ -119,6 +119,6 @@ const CATEGORIES = {
     path: "roles",
     soundsPath: "sounds/roles",
     metaPath: "roles/meta.json",
-    currencies: ["buttcoins"],
+    currencies: [],
   },
 };
