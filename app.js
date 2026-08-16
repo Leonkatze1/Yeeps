@@ -136,7 +136,10 @@ function initGallery(categoryKey) {
   document.title = category.title;
 
   let items = [];
-  const currencyKeys = category.currencies && category.currencies.length ? category.currencies : ["buttcoins"];
+  // An explicit empty array means "no currencies for this category" and is
+  // respected as-is. Only a missing/undefined `currencies` field falls
+  // back to ["buttcoins"].
+  const currencyKeys = Array.isArray(category.currencies) ? category.currencies : ["buttcoins"];
   const primaryCurrency = currencyKeys[0];
 
   async function load() {
