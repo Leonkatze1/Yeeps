@@ -131,3 +131,99 @@ select {
   font-size: 0.9rem;
   white-space: pre-wrap;
 }
+.card { cursor: pointer; }
+.card:focus { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+}
+.modal {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  max-width: 720px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.modal-close:hover { color: var(--text); background: var(--panel-hover); }
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.modal-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 260px;
+  background: #10131a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--border);
+}
+.modal-thumb img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+.modal-info { padding: 20px 24px 26px; }
+.modal-info h2 { margin: 0 0 12px 0; font-size: 1.4rem; }
+.modal-costs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+.modal-cost-pill {
+  background: #10131a;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.modal-cost-pill strong { color: var(--text); }
+.modal-desc {
+  color: var(--text);
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+  font-size: 0.95rem;
+}
+.modal-sounds-heading {
+  margin: 0 0 10px 0;
+  font-size: 1rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.sounds-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.sounds-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.sounds-table td:first-child { color: var(--text); white-space: nowrap; }
+.sounds-table audio { width: 240px; max-width: 100%; height: 32px; }
