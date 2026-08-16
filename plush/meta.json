@@ -1,0 +1,50 @@
+{
+ "Yeep Plush Blue.png": {
+   "description": "A Blue yeeps plsuh that copies your movement.",
+   "stuffing": 0,          // adds/overrides a currency
+   "buttcoins": 0,         // overrides filename-parsed cost
+   "sounds": [] // overrides auto-matched sounds
+ },
+  "Yeep Plush Pink.png": {
+   "description": "A Pink yeeps plsuh that copies your movement.",
+   "stuffing": 0,          // adds/overrides a currency
+   "buttcoins": 0,         // overrides filename-parsed cost
+   "sounds": [] // overrides auto-matched sounds
+ },
+  "Yeep Plush Peach.png": {
+   "description": "A Peach yeeps plsuh that copies your movement.",
+   "stuffing": 0,          // adds/overrides a currency
+   "buttcoins": 0,         // overrides filename-parsed cost
+   "sounds": [] // overrides auto-matched sounds
+ },
+  "Blue Plush Hat.png": {
+   "description": "A Blue hat for your little Yeeps Plush.",
+   "stuffing": 0,          // adds/overrides a currency
+   "buttcoins": 0,         // overrides filename-parsed cost
+   "sounds": [] // overrides auto-matched sounds
+ },
+  "Red Plush Hat.png": {
+   "description": "A Red hat for your little Yeeps Plush.",
+   "stuffing": 0,          // adds/overrides a currency
+   "buttcoins": 0,         // overrides filename-parsed cost
+   "sounds": [] // overrides auto-matched sounds
+ },
+  "Plush Bat.png": {
+   "description": "A Blue hat for your little Yeeps Plush.",
+   "stuffing": 0,          // adds/overrides a currency
+   "buttcoins": 0,         // overrides filename-parsed cost
+   "sounds": [] // overrides auto-matched sounds
+ },
+  "Plush Frisbee.png": {
+   "description": "A little Frisbee that can be thrown by your little Plush.",
+   "stuffing": 0,          // adds/overrides a currency
+   "buttcoins": 0,         // overrides filename-parsed cost
+   "sounds": [] // overrides auto-matched sounds
+ },
+  "Plush Sticky Bomb.png": {
+   "description": "A little Sticky Bomb that can blow other Yeeps Plushes away.",
+   "stuffing": 0,          // adds/overrides a currency
+   "buttcoins": 0,         // overrides filename-parsed cost
+   "sounds": [] // overrides auto-matched sounds
+ },
+}
