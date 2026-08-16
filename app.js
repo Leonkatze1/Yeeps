@@ -141,22 +141,34 @@ function initGallery(categoryKey) {
 
   async function load() {
     try {
-      const [files, meta, soundFiles] = await Promise.all([
+      const [files, rawMeta, soundFiles] = await Promise.all([
         fetchDirectory(category.path),
         fetchMetaSafe(category.metaPath),
         fetchDirectorySafe(category.soundsPath),
       ]);
 
+      const defaults = rawMeta.default || {};
+
       items = files
         .filter((f) => f.type === "file" && /\.png$/i.test(f.name))
         .map((f) => {
           const parsed = parseFilename(f.name);
-          const m = meta[f.name] || {};
+          const m = rawMeta[f.name] || {};
+
+          // Per-item value wins only if explicitly set on that item;
+          // otherwise fall back to meta.json's "default" block (if it
+          // sets that field); otherwise fall back to the computed value.
+          const pick = (field) => {
+            if (Object.prototype.hasOwnProperty.call(m, field)) return m[field];
+            if (Object.prototype.hasOwnProperty.call(defaults, field)) return defaults[field];
+            return undefined;
+          };
 
           const costs = {};
           currencyKeys.forEach((key, idx) => {
-            if (Object.prototype.hasOwnProperty.call(m, key)) {
-              costs[key] = m[key];
+            const val = pick(key);
+            if (val !== undefined) {
+              costs[key] = val;
             } else if (idx === 0) {
               costs[key] = parsed.cost;
             } else {
@@ -164,16 +176,27 @@ function initGallery(categoryKey) {
             }
           });
 
-          const sounds = Array.isArray(m.sounds) && m.sounds.length
-            ? m.sounds.map((name) => ({ name, matchedByName: false }))
-            : findMatchingSounds(parsed.name, soundFiles).map((f2) => ({ name: f2.name, url: f2.download_url }));
+          const descVal = pick("description");
+          const description = descVal !== undefined ? descVal : "";
+
+          const soundsVal = pick("sounds");
+          let sounds;
+          if (soundsVal !== undefined) {
+            const list = Array.isArray(soundsVal) ? soundsVal : [];
+            sounds = list.map((name) => {
+              const match = soundFiles.find((sf) => sf.name === name);
+              return match ? { name: match.name, url: match.download_url } : { name };
+            });
+          } else {
+            sounds = findMatchingSounds(parsed.name, soundFiles).map((f2) => ({ name: f2.name, url: f2.download_url }));
+          }
 
           return {
             filename: f.name,
             url: f.download_url,
             name: parsed.name,
             costs,
-            description: m.description || "",
+            description,
             sounds,
           };
         });
