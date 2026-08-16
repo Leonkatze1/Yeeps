@@ -7,6 +7,10 @@
                    (leave null if this category has no sounds yet)
      metaPath    - optional JSON file with extra per-item data:
                    {
+                     "default": {
+                       "description": "Shown when an item has none of its own.",
+                       "stuffing": 0
+                     },
                      "Exact_File_Name.png": {
                        "description": "Text shown in the detail view.",
                        "stuffing": 12,          // adds/overrides a currency
@@ -14,7 +18,12 @@
                        "sounds": ["a.mp3","b.wav"] // overrides auto-matched sounds
                      }
                    }
-                   (leave null if this category has no meta.json yet)
+                   Rule: a per-item field is used only if that item's own
+                   entry explicitly sets it. Otherwise "default" is used
+                   if it sets that field. Otherwise it falls back to the
+                   computed value (filename-parsed cost, auto-matched
+                   sounds, or an empty description).
+                   (leave metaPath null if this category has no meta.json yet)
      currencies  - which cost fields to show, in order. The FIRST currency
                    is the one parsed from the filename by default; any
                    currency can be overridden/added per-item via meta.json.
@@ -47,7 +56,7 @@ const CATEGORIES = {
     path: "items",
     soundsPath: "sounds/items",
     metaPath: "items/meta.json",
-    currencies: ["buttcoins", "stuffing"],
+    currencies: ["buttcoins"],
   },
   entities: {
     title: "Entity Gallery",
@@ -65,7 +74,7 @@ const CATEGORIES = {
     path: "potions",
     soundsPath: "sounds/potions",
     metaPath: "potions/meta.json",
-    currencies: ["buttcoins", "stuffing"],
+    currencies: ["buttcoins"],
   },
   discs: {
     title: "Discs",
@@ -74,7 +83,7 @@ const CATEGORIES = {
     path: "discs",
     soundsPath: "sounds/discs",
     metaPath: "discs/meta.json",
-    currencies: ["buttcoins", "stuffing"],
+    currencies: ["buttcoins"],
   },
   food: {
     title: "Food",
@@ -92,7 +101,7 @@ const CATEGORIES = {
     path: "paints",
     soundsPath: "sounds/paints",
     metaPath: "paints/meta.json",
-    currencies: ["buttcoins", "stuffing"],
+    currencies: ["buttcoins"],
   },
   pets: {
     title: "Pets",
@@ -119,6 +128,6 @@ const CATEGORIES = {
     path: "roles",
     soundsPath: "sounds/roles",
     metaPath: "roles/meta.json",
-    currencies: [],
+    currencies: ["buttcoins"],
   },
 };
