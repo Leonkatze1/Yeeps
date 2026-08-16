@@ -1,13 +1,20 @@
+const ESCAPED_DASH_PLACEHOLDER = "\u0000";
+
 function parseFilename(filename) {
   const base = filename.replace(/\.png$/i, "");
-  const idx = base.lastIndexOf("-");
+  // Protect escaped dashes ("\-") from being used as the cost separator.
+  const protectedBase = base.split("\\-").join(ESCAPED_DASH_PLACEHOLDER);
+
+  const idx = protectedBase.lastIndexOf("-");
+  const unescape = (s) => s.split(ESCAPED_DASH_PLACEHOLDER).join("-").replace(/_/g, " ");
+
   if (idx === -1) {
-    return { name: base.replace(/_/g, " "), cost: null };
+    return { name: unescape(protectedBase), cost: null };
   }
-  const namePart = base.slice(0, idx);
-  const costPart = base.slice(idx + 1);
+  const namePart = protectedBase.slice(0, idx);
+  const costPart = protectedBase.slice(idx + 1);
   const costNum = parseFloat(costPart.replace(/[^0-9.]/g, ""));
-  return { name: namePart.replace(/_/g, " "), cost: isNaN(costNum) ? null : costNum };
+  return { name: unescape(namePart), cost: isNaN(costNum) ? null : costNum };
 }
 
 function capitalize(s) {
