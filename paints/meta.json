@@ -2,5 +2,9 @@
  "default": {
    "stuffing": 100,          // adds/overrides a currency
    "buttcoins": 300         // overrides filename-parsed cost
+ },
+ "Base Paint Brush.png": {
+   "stuffing": 100,          // adds/overrides a currency
+   "buttcoins": 300         // overrides filename-parsed cost
  }
 }
