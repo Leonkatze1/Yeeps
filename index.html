@@ -225,7 +225,7 @@ async function loadItems() {
     els.status.style.display = "none";
     render();
   } catch (err) {
-    els.status.innerHTML = `<div class="error">Failed to load items from GitHub.\n\n${err.message}\n\nCheck the CONFIG block at the top of the script (owner / repo / branch / path).</div>`;
+    els.status.innerHTML = `<div class="error">Failed to load cosmetics from GitHub.\n\n${err.message}\n\nCheck the CONFIG block at the top of the script (owner / repo / branch / path).</div>`;
   }
 }
 
